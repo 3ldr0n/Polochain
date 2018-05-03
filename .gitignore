@@ -23,5 +23,10 @@ hs_err_pid*
 
 # Emacs and vim temp files
 *.swp*
-*#*
-*#*#
+*~
+\#*#
+.\#*
+
+# Org mode
+.org-id-locations
+*_archive
