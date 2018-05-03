@@ -27,6 +27,8 @@ hs_err_pid*
 \#*#
 .\#*
 
+target
+
 # Org mode
 .org-id-locations
 *_archive
