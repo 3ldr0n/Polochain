@@ -25,7 +25,12 @@ import java.util.Base64;
 public class StringUtil
 {
 
-    // Applies sha256 to a string and returns the result.
+    /**
+     * Applies sha256 to a string and returns the result.
+     *
+     * @param input
+     * @return
+     */
     public static String applySha256(String input)
     {
         try
@@ -51,7 +56,13 @@ public class StringUtil
         }
     }
 
-    // Applies ECDSA Signature and returns the result.
+    /**
+     * Applies ECDSA Signature and returns the result.
+     *
+     * @param privateKey
+     * @param input
+     * @return
+     */
     public static byte[] applyECDSASignature(PrivateKey privateKey, String input)
     {
         Signature dsa;
@@ -73,7 +84,14 @@ public class StringUtil
         return output;
     }
 
-    // Verifies a signature.
+    /**
+     * Verifies a signature.
+     *
+     * @param publicKey
+     * @param data
+     * @param Signature
+     * @return
+     */
     public static Boolean verifyECDSASignature(PublicKey publicKey, String data, byte[] signature)
     {
         try
@@ -89,6 +107,12 @@ public class StringUtil
         }
     }
 
+    /**
+     *
+     *
+     * @param ley
+     * @return
+     */
     public static String getStringFromKey(Key key)
     {
         return Base64.getEncoder().encodeToString(key.getEncoded());

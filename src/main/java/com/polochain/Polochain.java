@@ -33,6 +33,41 @@ public class Polochain
     public static Wallet secondWallet;
     public static double minimumTransaction;
 
+    /**
+     *
+     *
+     * @return
+     */
+    public static boolean isChainValid()
+    {
+        Block currentBlock;
+        Block previousBlock;
+
+        // Loop through blockchain to check the hashes.
+        for (int i = 1;i < blockchain.size(); i++)
+        {
+            currentBlock = blockchain.get(i);
+            previousBlock = blockchain.get(i - 1);
+
+            // Compare registered hash and calculated hash
+            if (!currentBlock.getHash().equals(currentBlock.calculateHash()))
+            {
+                System.out.println("Current hashes are different.");
+                return false;
+            }
+
+            // Compare previous hash with registered previous hash.
+            if (!previousBlock.getHash().equals(previousBlock.calculateHash()))
+            {
+                System.out.println("Previous hashes are different.");
+                return false;
+            }
+        }
+
+        return true;
+
+    }
+
     public static void main( String[] args )
     {
         // Setup Bouncy Castle as a Security Provider.
@@ -54,35 +89,5 @@ public class Polochain
         // Verify if the signature works and verify it from public key.
         System.out.println("Is signature verified: ");
         System.out.println(transaction.verifySignature());
-    }
-
-    public static boolean isChainValid()
-    {
-        Block currentBlock;
-        Block previousBlock;
-
-        // Loop through blockchain to check the hashes.
-        for (int i = 1;i < blockchain.size(); i++)
-        {
-            currentBlock = blockchain.get(i);
-            previousBlock = blockchain.get(i - 1);
-
-            // Compare registered hash and calculated hash
-            if (!currentBlock.getHash().equals(currentBlock.calculateHash()))
-            {
-                System.out.println("Current hashes are different");
-                return false;
-            }
-
-            // Compare previous hash with registered previous hash.
-            if (!previousBlock.getHash().equals(previousBlock.calculateHash()))
-            {
-                System.out.println("Previous hashes are different");
-                return false;
-            }
-        }
-
-        return true;
-
     }
 }

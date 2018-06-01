@@ -48,6 +48,10 @@ public class Transaction
         this.inputs = inputs;
     } 
 
+    /**
+     *
+     * @return 
+     */
     private String calculateHash()
     {
         // Increase the sequence to avoid identical transactions.
@@ -60,7 +64,11 @@ public class Transaction
         );
     }
 
-    // Signs all the data we don't wish to be tampered with.
+    /**
+     * Signs all the data we don't wish to be tampered with.
+     *
+     * @param privateKey
+     */
     public void generateSignature(PrivateKey privateKey)
     {
         String data = StringUtil.getStringFromKey(sender) + StringUtil.getStringFromKey(reciepient) 
@@ -69,7 +77,11 @@ public class Transaction
         signature = StringUtil.applyECDSASignature(privateKey, data);
     }
 
-    // Verifies the data the user signed hasn't been tampered with.
+    /**
+     * Verifies the data the user signed hasn't been tampered with.
+     *
+     * @return
+     */
     public Boolean verifySignature()
     {
         String data = StringUtil.getStringFromKey(sender) + StringUtil.getStringFromKey(reciepient)
@@ -78,7 +90,11 @@ public class Transaction
         return StringUtil.verifyECDSASignature(sender, data, signature);
     }
 
-    // Returns true if the new transaction was created.
+    /**
+     * Returns true if the new transaction was created.
+     *
+     * @return
+     */
     public boolean processTransaction()
     {
         if (verifySignature() == false)
@@ -127,7 +143,11 @@ public class Transaction
         return true;
     }
 
-    // Returns the sum of all inputs(UTXOs) values.
+    /**
+     * Returns the sum of all inputs(UTXOs) values.
+     *
+     * @return
+     */
     public double getInputsValue()
     {
         double total = 0;
