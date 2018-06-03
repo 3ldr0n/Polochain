@@ -23,20 +23,23 @@ import java.security.Security;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Polochain
 {
 
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
     public static HashMap<String, TransactionOutput> UTXOs = new HashMap<String, TransactionOutput>();
-    public static int difficulty = 5;
+    public static int difficulty = 10;
     public static Wallet firstWallet;
     public static Wallet secondWallet;
     public static double minimumTransaction;
 
     /**
+     * Checks wheter the chain is valid or not.
      *
-     *
-     * @return
+     * @return True if the chain is valid.
      */
     public static boolean isChainValid()
     {
@@ -89,5 +92,8 @@ public class Polochain
         // Verify if the signature works and verify it from public key.
         System.out.println("Is signature verified: ");
         System.out.println(transaction.verifySignature());
+
+        Block genesis = new Block("My message", "0");
+        genesis.mineBlock(difficulty);
     }
 }

@@ -41,9 +41,9 @@ public class Block
     }
 
     /**
+     * Returns the object's hash.
      *
-     *
-     * @return
+     * @return The object's hash.
      */
     public String getHash()
     {
@@ -53,7 +53,7 @@ public class Block
     /**
      * Calculates hash based on content.
      *
-     * @return
+     * @return calculated hash.
      */
     public String calculateHash()
     {
@@ -67,12 +67,13 @@ public class Block
     }
 
     /**
+     * 
      *
-     * @param difficulty
+     * @param difficulty Represents the difficulty to mine a block.
      */
     public void mineBlock(int difficulty)
     {
-        // Creates a string with diffuculty to mine equals to difficulty * "0"
+        // Creates a string with diffuculty to mine equals to difficulty * "0".
         String target = new String(new char[difficulty]).replace('\0', '0');
         System.out.println("Target: " + target);
         while (!hash.substring(0, difficulty).equals(target))
@@ -82,6 +83,7 @@ public class Block
             System.out.println("Hash: " + hash);
             System.out.println("Substring: " + hash.substring(0, difficulty));
         }
+
         System.out.println("Block mined! : " + hash);
     }
 }
