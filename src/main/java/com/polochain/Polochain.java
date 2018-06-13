@@ -23,6 +23,9 @@ import java.security.Security;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+import com.google.gson.GsonBuilder;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 /**
  *
  */
@@ -31,13 +34,14 @@ public class Polochain
 
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
     public static HashMap<String, TransactionOutput> UTXOs = new HashMap<String, TransactionOutput>();
-    public static int difficulty = 10;
+    public static int difficulty = 5;
     public static Wallet firstWallet;
     public static Wallet secondWallet;
     public static double minimumTransaction;
 
     /**
-     * Checks wheter the chain is valid or not.
+     * Checks wheter the chain is valid or not, by looping through all the blocks in the chain and
+     * comparing its hashes.
      *
      * @return True if the chain is valid.
      */
@@ -45,6 +49,7 @@ public class Polochain
     {
         Block currentBlock;
         Block previousBlock;
+        String hashTarget = new String(new char[difficulty]).replace("\0", "0");
 
         // Loop through blockchain to check the hashes.
         for (int i = 1;i < blockchain.size(); i++)
@@ -65,16 +70,23 @@ public class Polochain
                 System.out.println("Previous hashes are different.");
                 return false;
             }
+
+            // Checks if the hash has already been solved.
+            if (! currentBlock.getHash().substring(0, difficulty).equals(hashTarget))
+            {
+                System.out.println("Block not mined yet.");
+                return false;
+            }
         }
 
         return true;
 
     }
 
-    public static void main( String[] args )
+    public static void main(String[] args)
     {
         // Setup Bouncy Castle as a Security Provider.
-        Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+        Security.addProvider(new BouncyCastleProvider());
 
         // Create the wallets.
         firstWallet = new Wallet();
@@ -93,7 +105,10 @@ public class Polochain
         System.out.println("Is signature verified: ");
         System.out.println(transaction.verifySignature());
 
-        Block genesis = new Block("My message", "0");
-        genesis.mineBlock(difficulty);
+        blockchain.add(new Block("yey", "0"));
+        blockchain.get(0).mineBlock(difficulty);
+
+        String jsonOutput = new GsonBuilder().setPrettyPrinting().create().toJson(blockchain);
+        System.out.println(jsonOutput);
     }
 }

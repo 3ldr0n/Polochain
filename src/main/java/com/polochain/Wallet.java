@@ -60,7 +60,6 @@ public class Wallet
     /**
      *
      *
-     * @return
      * @throw
      */
     public void generateKeyPair()
