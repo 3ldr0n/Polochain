@@ -25,10 +25,10 @@ public class Block
 {
 
     private String hash;
-    public String previousHash;
     private String data;
     private long timeStamp;
     private int nonce;
+    public String previousHash;
 
     public Block(String data, String previousHash)
     {

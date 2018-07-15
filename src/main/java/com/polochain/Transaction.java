@@ -24,15 +24,16 @@ import java.util.ArrayList;
 
 public class Transaction
 {
-    // Hash of the transaction.
+    // Transaction's hash.
     public String transactionId;
-    // Sender's adress(public key).
+    // Sender's adress (public key).
     public PublicKey sender;
-    // Reciepient's adress(public key).
+    // Reciepient's adress (public key).
     public PublicKey reciepient;
+    // Transaction's value.
     public double value;
     // Prevents anybody else from spending funds in other user's wallet.
-    public byte[] signature;
+    public byte signature[];
 
     public ArrayList<TransactionInput> inputs = new ArrayList<TransactionInput>();
     public ArrayList<TransactionOutput> outputs = new ArrayList<TransactionOutput>();
@@ -49,8 +50,9 @@ public class Transaction
     } 
 
     /**
+     * Calculates the transaction's hash (its id).
      *
-     * @return 
+     * @return Transaction's hash.
      */
     private String calculateHash()
     {
@@ -67,7 +69,7 @@ public class Transaction
     /**
      * Signs all the data we don't wish to be tampered with.
      *
-     * @param privateKey
+     * @param privateKey User's private key.
      */
     public void generateSignature(PrivateKey privateKey)
     {
@@ -146,7 +148,7 @@ public class Transaction
     /**
      * Returns the sum of all inputs(UTXOs) values.
      *
-     * @return
+     * @return the value of the input.
      */
     public double getInputsValue()
     {

@@ -34,7 +34,7 @@ public class Polochain
 
     public static ArrayList<Block> blockchain = new ArrayList<Block>();
     public static HashMap<String, TransactionOutput> UTXOs = new HashMap<String, TransactionOutput>();
-    public static int difficulty = 5;
+    public static final int difficulty = 5;
     public static Wallet firstWallet;
     public static Wallet secondWallet;
     public static double minimumTransaction;

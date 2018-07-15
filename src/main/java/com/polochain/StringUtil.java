@@ -57,11 +57,11 @@ public class StringUtil
     }
 
     /**
-     * Applies ECDSA Signature and returns the result.
+     * Applies ECDSA Signature and returns the result in bytes.
      *
-     * @param privateKey
+     * @param privateKey Sender's private key.
      * @param input
-     * @return
+     * @return An array of bytes.
      */
     public static byte[] applyECDSASignature(PrivateKey privateKey, String input)
     {
@@ -87,8 +87,8 @@ public class StringUtil
     /**
      * Verifies a signature.
      *
-     * @param publicKey
-     * @param data
+     * @param publicKey Senders's public key.
+     * @param data 
      * @param Signature
      * @return
      */

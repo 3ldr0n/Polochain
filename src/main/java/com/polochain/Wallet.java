@@ -58,23 +58,23 @@ public class Wallet
     }
 
     /**
+     * Use the elliptic-curve cryptography to create the public and private keys.
      *
-     *
-     * @throw
+     * @throws RuntimeException
      */
     public void generateKeyPair()
     {
         try
         {
-            KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
+            KeyPairGenerator keyGenerator = KeyPairGenerator.getInstance("ECDSA", "BC");
             SecureRandom random = SecureRandom.getInstance("SHA1PRNG");
             ECGenParameterSpec esSpec = new ECGenParameterSpec("prime192v1");
 
-            // Initialize the key generator and generate a KeyPair
-            keyGen.initialize(esSpec, random);
-            KeyPair keyPair = keyGen.generateKeyPair();
+            // Initialize the key generator and generate a KeyPair.
+            keyGenerator.initialize(esSpec, random);
+            KeyPair keyPair = keyGenerator.generateKeyPair();
 
-            // Set the public and private keys from KeyPair
+            // Set the public and private keys.
             privateKey = keyPair.getPrivate();
             publicKey = keyPair.getPublic();
         }
